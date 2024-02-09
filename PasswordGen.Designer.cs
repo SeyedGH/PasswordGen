@@ -100,6 +100,8 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.timerClearClip = new System.Windows.Forms.Timer(this.components);
             this.timerHistoryLock = new System.Windows.Forms.Timer(this.components);
+            this.checkBoxTopMost = new System.Windows.Forms.CheckBox();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.contextMenuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -156,7 +158,7 @@
             this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Controls.Add(this.tabPageHistoryLive);
             this.tabControl.Controls.Add(this.tabPage3);
-            this.tabControl.Location = new System.Drawing.Point(9, 10);
+            this.tabControl.Location = new System.Drawing.Point(11, 8);
             this.tabControl.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -322,9 +324,9 @@
             this.checkBoxHigherCase.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxHigherCase.Location = new System.Drawing.Point(5, 54);
             this.checkBoxHigherCase.Name = "checkBoxHigherCase";
-            this.checkBoxHigherCase.Size = new System.Drawing.Size(84, 17);
+            this.checkBoxHigherCase.Size = new System.Drawing.Size(82, 17);
             this.checkBoxHigherCase.TabIndex = 19;
-            this.checkBoxHigherCase.Text = "Higher Case";
+            this.checkBoxHigherCase.Text = "Upper Case";
             this.checkBoxHigherCase.UseVisualStyleBackColor = true;
             // 
             // checkBoxNumbers
@@ -353,6 +355,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBoxTopMost);
             this.tabPage2.Controls.Add(this.checkBoxAutoStart);
             this.tabPage2.Controls.Add(this.buttonSave2);
             this.tabPage2.Controls.Add(this.panel3);
@@ -383,7 +386,7 @@
             // checkBoxAutoStart
             // 
             this.checkBoxAutoStart.AutoSize = true;
-            this.checkBoxAutoStart.Location = new System.Drawing.Point(108, 116);
+            this.checkBoxAutoStart.Location = new System.Drawing.Point(215, 117);
             this.checkBoxAutoStart.Name = "checkBoxAutoStart";
             this.checkBoxAutoStart.Size = new System.Drawing.Size(68, 17);
             this.checkBoxAutoStart.TabIndex = 34;
@@ -442,6 +445,8 @@
             this.textBoxShortcut.TabIndex = 22;
             this.textBoxShortcut.Text = "Control + Shift + Z";
             this.textBoxShortcut.Enter += new System.EventHandler(this.textBoxShortcut_Enter);
+            this.textBoxShortcut.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxShortcut_KeyDown);
+            this.textBoxShortcut.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxShortcut_KeyPress);
             this.textBoxShortcut.Leave += new System.EventHandler(this.textBoxShortcut_Leave);
             // 
             // checkBoxShortcut
@@ -808,6 +813,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.lblVersion);
             this.tabPage3.Controls.Add(this.linkLabel3);
             this.tabPage3.Controls.Add(this.linkLabel2);
             this.tabPage3.Controls.Add(this.linkLabel1);
@@ -826,11 +832,10 @@
             // 
             // linkLabel3
             // 
-            this.linkLabel3.AutoSize = true;
             this.linkLabel3.Location = new System.Drawing.Point(279, 194);
             this.linkLabel3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(217, 13);
+            this.linkLabel3.Size = new System.Drawing.Size(217, 25);
             this.linkLabel3.TabIndex = 8;
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "https://github.com/SeyedGH/PasswordGen";
@@ -838,11 +843,10 @@
             // 
             // linkLabel2
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(279, 161);
+            this.linkLabel2.Location = new System.Drawing.Point(279, 159);
             this.linkLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(254, 13);
+            this.linkLabel2.Size = new System.Drawing.Size(254, 23);
             this.linkLabel2.TabIndex = 7;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "https://sourceforge.net/projects/passwordgenerator";
@@ -850,11 +854,10 @@
             // 
             // linkLabel1
             // 
-            this.linkLabel1.AutoSize = true;
             this.linkLabel1.Location = new System.Drawing.Point(279, 127);
             this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(126, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(254, 22);
             this.linkLabel1.TabIndex = 6;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "https://passwordgen.info";
@@ -863,7 +866,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::PasswordGen.Properties.Resources.QR_code;
-            this.pictureBox2.Location = new System.Drawing.Point(172, 127);
+            this.pictureBox2.Location = new System.Drawing.Point(175, 124);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(96, 93);
@@ -874,7 +877,7 @@
             // pictureBoxDonate
             // 
             this.pictureBoxDonate.Image = global::PasswordGen.Properties.Resources.PayPal_Donate_Button;
-            this.pictureBoxDonate.Location = new System.Drawing.Point(9, 150);
+            this.pictureBoxDonate.Location = new System.Drawing.Point(14, 150);
             this.pictureBoxDonate.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBoxDonate.Name = "pictureBoxDonate";
             this.pictureBoxDonate.Size = new System.Drawing.Size(150, 45);
@@ -923,16 +926,38 @@
             this.timerHistoryLock.Interval = 120000;
             this.timerHistoryLock.Tick += new System.EventHandler(this.timerHistoryLock_Tick);
             // 
+            // checkBoxTopMost
+            // 
+            this.checkBoxTopMost.AutoSize = true;
+            this.checkBoxTopMost.Checked = true;
+            this.checkBoxTopMost.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxTopMost.Location = new System.Drawing.Point(108, 115);
+            this.checkBoxTopMost.Name = "checkBoxTopMost";
+            this.checkBoxTopMost.Size = new System.Drawing.Size(67, 17);
+            this.checkBoxTopMost.TabIndex = 35;
+            this.checkBoxTopMost.Text = "Topmost";
+            this.checkBoxTopMost.UseVisualStyleBackColor = true;
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(4, 201);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(100, 13);
+            this.lblVersion.TabIndex = 9;
+            this.lblVersion.Text = "v 1.0.1 (9-feb-2024)";
+            // 
             // PasswordGen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(564, 264);
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "PasswordGen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PasswordGen";
             this.TopMost = true;
             this.Activated += new System.EventHandler(this.PasswordGen_Activated);
@@ -1041,6 +1066,8 @@
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.CheckBox checkBoxAutoStart;
+        private System.Windows.Forms.CheckBox checkBoxTopMost;
+        private System.Windows.Forms.Label lblVersion;
     }
 }
 

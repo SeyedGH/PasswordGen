@@ -19,7 +19,6 @@ namespace PasswordGen
         [DllImportAttribute("User32.DLL")]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
         private const int SW_SHOW = 5;
-        private const int SW_MINIMIZE = 6;
         private const int SW_RESTORE = 9;
 
         /// <summary>
@@ -45,8 +44,10 @@ namespace PasswordGen
                     {
                         if (process.Id != current.Id)
                         {
+                          
                             ShowWindow(process.MainWindowHandle, SW_SHOW);
                             SetForegroundWindow(process.MainWindowHandle);
+                            
                             break;
                             
                         }

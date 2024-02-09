@@ -42,6 +42,12 @@ namespace PasswordGen
         {
             try
             {
+                hotKeyManager.Unregister(hotKey);
+            }
+            catch { }
+
+            try
+            {
                 hotKeyManager = new HotKeyManager();
 
                 string shortcut = textBoxShortcut.Text;
@@ -51,6 +57,7 @@ namespace PasswordGen
                 Key keypress;
                 ModifierKeys mkeys1;
                 ModifierKeys mkeys2;
+
 
                 try
                 {
@@ -453,6 +460,7 @@ namespace PasswordGen
                 string shortcutKeys;
                 string symbolPlacement = "";
                 string numberPlacement = "";
+                string topMost = "";
 
                 symbols = textSymbols.Text;
                 numeric = textNumbers.Text;
@@ -482,6 +490,10 @@ namespace PasswordGen
                 shortcut = Convert.ToString(checkBoxShortcut.Checked);
                 shortcutKeys = Convert.ToString(textBoxShortcut.Text);
 
+                topMost = Convert.ToString(checkBoxTopMost.Checked);
+
+
+
                 if (radioButtonSymRandom.Checked)
                     symbolPlacement = "Random";
                 
@@ -506,7 +518,7 @@ namespace PasswordGen
                 string config = symbols + "%||%" + numeric + "%||%" + higherCases + "%||%" + lowerCases + "%||%" + length + "%||%" + symbolLength + "%||%" + numericLength + "%||%" +
                                 useSymbols + "%||%" + useNumeric + "%||%" + useHigherCases + "%||%" + useLowerCases + "%||%" + history64 + "%||%" + historyPassword + "%||%" +
                                 balloonTip + "%||%" + balloonTipDuration + "%||%" + opacity + "%||%" + opacityPercentage + "%||%" + clipboardCopy + "%||%" + clipboardCopyDureation + "%||%" +
-                                history + "%||%" + historyAmount + "%||%" + shortcut + "%||%" + shortcutKeys + "%||%" + symbolPlacement + "%||%" + numberPlacement;
+                                history + "%||%" + historyAmount + "%||%" + shortcut + "%||%" + shortcutKeys + "%||%" + symbolPlacement + "%||%" + numberPlacement + "%||%" + topMost;
 
                 var configBytes = System.Text.Encoding.UTF8.GetBytes(config);
                 string config64 = System.Convert.ToBase64String(configBytes);
@@ -521,8 +533,12 @@ namespace PasswordGen
         {
             try
             {
-                if (File.Exists("config.pwgen") == false) 
+                if (File.Exists("config.pwgen") == false)
+                {
+                    MessageBox.Show("This application is a tray application!", "Tray application", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     writeConfig();
+                }
+                    
 
                 string config64 = File.ReadAllText("config.pwgen");
 
@@ -573,6 +589,7 @@ namespace PasswordGen
                 string shortcutKeys = Convert.ToString(configitems[22]);
                 string symbolPlacement = Convert.ToString(configitems[23]);
                 string numberPlacement = Convert.ToString(configitems[24]);
+                bool  topMost = Convert.ToBoolean(configitems[25]);
 
                 textSymbols.Text = symbols;
                 textNumbers.Text = numeric;
@@ -585,6 +602,7 @@ namespace PasswordGen
                 checkBoxHigherCase.Checked = useHigherCases;
                 checkLowerCase.Checked = useLowerCases;
                 checkBoxNumbers.Checked = useNumeric;
+                checkBoxTopMost.Checked = topMost;
 
                 listBoxHistory.Items.Clear();
 
@@ -628,16 +646,20 @@ namespace PasswordGen
                 else if (numberPlacement == "Back")
                     radioButtonNumRandom.Checked = true;
 
+                if (checkBoxTopMost.Checked)
+                    this.TopMost = true;
+                else 
+                    this.TopMost = false;
+
+
                 RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", false);
 
                 if (rkApp.GetValue("PasswordGen") == null)
                 {
-                    // The value doesn't exist, the application is not set to run at startup
                     checkBoxAutoStart.Checked = false;
                 }
                 else
                 {
-                    // The value exists, the application is set to run at startup
                     checkBoxAutoStart.Checked = true;
                 }
             }
@@ -841,6 +863,7 @@ namespace PasswordGen
         private void buttonSave2_Click(object sender, EventArgs e)
         {
             writeConfig();
+            readConfig();
         }
 
         private void checkBoxHistory_CheckedChanged(object sender, EventArgs e)
@@ -906,6 +929,38 @@ namespace PasswordGen
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/SeyedGH/PasswordGen");
+        }
+
+        private void textBoxShortcut_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void textBoxShortcut_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            string[] keyData = e.KeyData.ToString().Split(',');
+
+            Array.Reverse(keyData);
+
+            textBoxShortcut.Text = "";
+
+            foreach (string keypress  in  keyData  )
+            {
+                if (keypress.IndexOf("Key") > 0)
+                {
+                    continue;
+
+                }
+                    
+
+                if (textBoxShortcut.Text != "")
+                    textBoxShortcut.Text += " + ";
+
+                textBoxShortcut.Text += keypress.Trim();
+
+            }
+           
         }
     }
 }
