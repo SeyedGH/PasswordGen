@@ -10,7 +10,6 @@ using DeviceId;
 using System.Security.Cryptography;
 using System.Text;
 using System.Linq;
-using System.Net.NetworkInformation;
 using Microsoft.Win32;
 
 namespace PasswordGen
@@ -355,7 +354,7 @@ namespace PasswordGen
                 hotKeyManager.Dispose();
             }catch { }
             
-            System.Windows.Forms.Application.Exit();
+            Application.Exit();
 
         }
 
@@ -523,7 +522,7 @@ namespace PasswordGen
                 var configBytes = System.Text.Encoding.UTF8.GetBytes(config);
                 string config64 = System.Convert.ToBase64String(configBytes);
 
-                File.WriteAllText("config.pwgen", config64);
+                File.WriteAllText(Path.GetDirectoryName(Application.ExecutablePath) + @"\config.pwgen", config64);
 
             }
             catch { }
@@ -533,14 +532,14 @@ namespace PasswordGen
         {
             try
             {
-                if (File.Exists("config.pwgen") == false)
+                if (File.Exists(Path.GetDirectoryName(Application.ExecutablePath) + @"\config.pwgen") == false)
                 {
                     MessageBox.Show("This application is a tray application!", "Tray application", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     writeConfig();
                 }
                     
 
-                string config64 = File.ReadAllText("config.pwgen");
+                string config64 = File.ReadAllText(Path.GetDirectoryName(Application.ExecutablePath) + @"\config.pwgen");
 
                 string config;
                 byte[] data = System.Convert.FromBase64String(config64);

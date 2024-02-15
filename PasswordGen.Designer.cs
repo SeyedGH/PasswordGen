@@ -53,6 +53,7 @@
             this.checkBoxNumbers = new System.Windows.Forms.CheckBox();
             this.checkBoxSymbols = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBoxTopMost = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoStart = new System.Windows.Forms.CheckBox();
             this.buttonSave2 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -90,6 +91,7 @@
             this.textBoxHistoryPassword = new System.Windows.Forms.TextBox();
             this.listBoxHistory = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -100,8 +102,6 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.timerClearClip = new System.Windows.Forms.Timer(this.components);
             this.timerHistoryLock = new System.Windows.Forms.Timer(this.components);
-            this.checkBoxTopMost = new System.Windows.Forms.CheckBox();
-            this.lblVersion = new System.Windows.Forms.Label();
             this.contextMenuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -382,6 +382,18 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxTopMost
+            // 
+            this.checkBoxTopMost.AutoSize = true;
+            this.checkBoxTopMost.Checked = true;
+            this.checkBoxTopMost.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxTopMost.Location = new System.Drawing.Point(108, 115);
+            this.checkBoxTopMost.Name = "checkBoxTopMost";
+            this.checkBoxTopMost.Size = new System.Drawing.Size(67, 17);
+            this.checkBoxTopMost.TabIndex = 35;
+            this.checkBoxTopMost.Text = "Topmost";
+            this.checkBoxTopMost.UseVisualStyleBackColor = true;
             // 
             // checkBoxAutoStart
             // 
@@ -830,6 +842,15 @@
             this.tabPage3.Text = "About";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(4, 201);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(106, 13);
+            this.lblVersion.TabIndex = 9;
+            this.lblVersion.Text = "v 1.0.2 (15-feb-2024)";
+            // 
             // linkLabel3
             // 
             this.linkLabel3.Location = new System.Drawing.Point(279, 194);
@@ -925,27 +946,6 @@
             // 
             this.timerHistoryLock.Interval = 120000;
             this.timerHistoryLock.Tick += new System.EventHandler(this.timerHistoryLock_Tick);
-            // 
-            // checkBoxTopMost
-            // 
-            this.checkBoxTopMost.AutoSize = true;
-            this.checkBoxTopMost.Checked = true;
-            this.checkBoxTopMost.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxTopMost.Location = new System.Drawing.Point(108, 115);
-            this.checkBoxTopMost.Name = "checkBoxTopMost";
-            this.checkBoxTopMost.Size = new System.Drawing.Size(67, 17);
-            this.checkBoxTopMost.TabIndex = 35;
-            this.checkBoxTopMost.Text = "Topmost";
-            this.checkBoxTopMost.UseVisualStyleBackColor = true;
-            // 
-            // lblVersion
-            // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(4, 201);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(100, 13);
-            this.lblVersion.TabIndex = 9;
-            this.lblVersion.Text = "v 1.0.1 (9-feb-2024)";
             // 
             // PasswordGen
             // 
